@@ -11757,7 +11757,7 @@ div#notebook {
 </div><div style="margin-top:120px;">
     <h1 style="text-align:center;">Introduction to Intel pyDAAL</h1>
 </div><div style="width:100%; margin-top:50px;">
-    <p style="text-align:center;">Raphael Cóbe, Silvio Stanzanni, Jefferson Fialho, Rogério Iope</p>
+    <p style="text-align:center;">Raphael Cóbe, Silvio Stanzani, Jefferson Fialho, Rogério Iope</p>
     <p style="text-align:center;">{rmcobe,silvio,jfialho,rogerio}@ncc.unesp.br</p>
     <p style="text-align:center;">Source available on <a href="https://github.com/intel-unesp-mcp/datascience-workshop">Github</a>
 </div>
@@ -11769,7 +11769,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Abstract">Abstract<a class="anchor-link" href="#Abstract">&#182;</a></h2><p>In this paper we intend to show how the python API of the Intel DAAL tool works. First we explain how to manipulate data using the pyDAAL programming interface, then we show how to integrate it with python data manipulation/math APIs. We then demonstrate how to use the Intel pyDAAL to implement a simple Linear Regression solution for a prediction problem.</p>
+<h2 id="Abstract">Abstract<a class="anchor-link" href="#Abstract">&#182;</a></h2><p>In this paper we intend to show how the python API of the Intel DAAL tool works. First, we explain how to manipulate data using the pyDAAL programming interface and then we show how to integrate it with python data manipulation/math APIs. Finally, we demonstrate how to use the Intel pyDAAL to implement a simple Linear Regression solution for a prediction problem.</p>
 
 </div>
 </div>
@@ -11780,7 +11780,7 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><p>Data Science is a new recent field that put together lots of concepts of other areas such as: Data mining, Data Analysis, Data modeling, Data Prediction, Data Visualization and so on.
-The need for performing such tasks a quickly as possible has become the main issue in today's data solutions. With that in mind, Intel has developed the Data Analytics Acceleration Library (DAAL), a highly optimized library which goal is to provide a full solution for data analytics keeping today's highly parallel systems such as Intel Xeon Phi.<br>
+The need for performing such tasks as quickly as possible has become the main issue in today's data solutions. With that in mind, Intel has developed the Data Analytics Acceleration Library (DAAL), a highly optimized library whose goal is to provide a full solution for data analytics targeting today's highly parallel systems such as Intel Xeon Phi.<br>
 Intel DAAL delivers solutions for many steps of a data analytics pipeline, such as pre-processing, data transformations, dimensionality reduction, data modeling, prediction, and several drivers for reading and writing in most of the common data formats. A summary of all features inside the library can be seen in Figure 1.</p>
 
 </div>
@@ -11801,14 +11801,14 @@ Intel DAAL delivers solutions for many steps of a data analytics pipeline, such 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Also, in Figure 1, one can see that all APIs are compatible with C++, Java, and Python (a recent addition available from version 2017 beta). Many of the algorithms implemented inside the tool can be executed in 3 main modes:</p>
+<p>As can be seen in Figure 1, one can see that all APIs are compatible with C++, Java, and Python (a recent addition available from version 2017 beta). Many of the algorithms implemented inside the tool can be executed in 3 main modes:</p>
 <ul>
-<li><strong>Batch</strong>: in which the processing occurs in a serial way, e.g., the training algorithm is executed in a single node sequentially; </li>
+<li><strong>Batch</strong>: in this mode, the processing occurs in a serial way, e.g., the training algorithm is executed in a single node sequentially; </li>
 <li><strong>Distributed</strong>: as the name suggests, in this processing mode, the dataset must be split and distributed among the computing nodes. The algorithm then calculate partial solutions and, at the last step, unifies such solutions; and</li>
 <li><strong>Online</strong>: in this processing mode, the data is considered as being a continuous stream. The processing occurs by building incremental models, and, at the end, building a full model from the partial models.</li>
 </ul>
-<p>More on the processing modes will be covered during the text.</p>
-<p>The intention of the tools is to able to cover most of the activities of a typical analytics pipeline such as the one seen on Figure 2.</p>
+<p>More on the processing modes will be covered in this whitepaper.</p>
+<p>The main goal of the Intel DAAL framework is to be able to cover most of the activities of a typical analytics pipeline such as the one seen on Figure 2.</p>
 
 </div>
 </div>
@@ -11828,8 +11828,8 @@ Intel DAAL delivers solutions for many steps of a data analytics pipeline, such 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The programming model imposed by this framework involves first reading the datasource and loading the correct data structures with the data. The datasource can either be in memory or in a persistent media such as database or a CSV file. Secondly, we need to choose the algorithm for processing the data. In this step we need to specify the computation mode of our choice. Then we have to execute the chosen algorithm. After the execution is finished, depending on the computation mode chosen, we may need to perform a merging step (computation finalization) on which, the partial results are used to produce a final result, e.g., building a final model of partial ones.<br>
-In the following Sections we will explain each of the steps described above. It is not our intension to cover all of the algorithms available at the DAAL framework. For this paper we will show an example of linear regression, on a batch computation mode.</p>
+<p>The programming model imposed by this framework involves first reading the datasource and loading the correct data structures with the data. The datasource can either be in memory or in a persistent media such as a database or a CSV file. Then, we need to choose the algorithm for processing the data. In this step we need to specify the computation mode of our choice. Then we have to execute the chosen algorithm. After the execution is finished, depending on the computation mode specified, we may need to perform a merging step (computation finalization) in which, the partial results are used to produce a final result, e.g., building a final model of partial ones.<br>
+In the following sections we will explain each of the steps described above. It is not our intention to cover all of the algorithms available in the DAAL framework. For this paper we will show an example of linear regression on a batch computation mode.</p>
 
 </div>
 </div>
@@ -11839,9 +11839,9 @@ In the following Sections we will explain each of the steps described above. It 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-data-used">The data used<a class="anchor-link" href="#The-data-used">&#182;</a></h2><p>In this paper we used the data available at the UCI Machine Learning Repository. It is used for prediction of residuary resistance of sailing yachts at the initial design stage. Such task is of a great value for evaluating the ship's performance and for estimating the required propulsive power.<br>
+<h2 id="The-data-used">The data used<a class="anchor-link" href="#The-data-used">&#182;</a></h2><p>In this paper we retrieved the data available at the UCI Machine Learning Repository that is used for prediction of residuary resistance of sailing yachts at the initial design stage. Such task is of a great value for evaluating the ship's performance and for estimating the required propulsive power.<br>
 Essentially, the inputs include the basic hull dimensions and the boat velocity.</p>
-<p>The data set comprises of 308 full-scale observations and, at each observation, we have data of the following features:</p>
+<p>The data set comprises of 308 full-scale observations. At each observation we have data for the following features:</p>
 <ol>
 <li>Longitudinal position of the center of buoyancy; </li>
 <li>Prismatic coefficient;</li>
@@ -11861,7 +11861,7 @@ Essentially, the inputs include the basic hull dimensions and the boat velocity.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Data-Management">Data Management<a class="anchor-link" href="#Data-Management">&#182;</a></h1><p>The main data abstraction used by the DAAL framework is called Numeric Table. It stores observations on lines and features on columns as can be seen in Figure 3. There are several specializations for this data structure optimized for specific usage cases. We will cover this latter.</p>
+<h1 id="Data-Management">Data Management<a class="anchor-link" href="#Data-Management">&#182;</a></h1><p>The main data abstraction used by the DAAL framework is called Numeric Table. It stores observations on lines and features on columns as can be seen in Figure 3. There are several specializations for this data structure optimized for specific use cases. We will cover this latter.</p>
 <p><center><img src=datatable_structure.png width=270px/></center></p>
 <p style="text-align:center;"><strong>Figure 3.</strong> Numeric Table</p>
 </div>
@@ -11872,12 +11872,12 @@ Essentially, the inputs include the basic hull dimensions and the boat velocity.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>On a common usage of the framework, we first have to select the appropriate data source, which provides access for the data itself. It can be a data file, a database connection, a data stream, and so on. Intel DAAL data source interface provides support for 3 main data types: categorical, ordinal, and continuous. A data source main functionality is to stream data back and forward into memory.</p>
+<p>Following a common usage of the framework, we first have to select the appropriate data source, which provides access for the data itself. It can be a data file, a database connection, a data stream, and so on. Intel DAAL data source interface provides support for 3 main data types: categorical, ordinal, and continuous. A data source main functionality is to stream data back and forward into memory.</p>
 <p>The life cycle of a numeric table consists of the following major steps:</p>
 <ol>
-<li>Initialize: construct a numeric table (one has to provide the number of rows and columns)</li>
-<li>Operate: perform any operation needed on the data structure, such as data slicing;</li>
-<li>Deinitialize: deallocate the memory used to store the data structure;</li>
+<li>Initialize: construct a numeric table (one has to provide the number of rows and columns);</li>
+<li>Operate: perform any operation needed on the data structure, such as data slicing; and</li>
+<li>Deinitialize: deallocate the memory used to store the data structure.</li>
 </ol>
 
 </div>
@@ -11894,7 +11894,7 @@ Essentially, the inputs include the basic hull dimensions and the boat velocity.
 <li><strong>Homogeneous Tables</strong>: <strong>dense</strong> and <strong>sparse</strong>. </li>
 <li><strong>Matrices</strong>: <strong>dense matrix</strong>, <strong>packed symmetric matrix</strong>, and <strong>packed triangular matrices</strong>. </li>
 </ul>
-<p>Essentially, Heterogeneous numeric tables allows to store data features that are of different data types. Intel DAAL provides two ways to represent non-homogeneous numeric tables: Array of Structures - AOS and Structures of Arrays -SOA.
+<p>Essentially, Heterogeneous numeric tables allows one to store data features that are of different data types. Intel DAAL provides two ways to represent non-homogeneous numeric tables: Array of Structures - AOS and Structures of Arrays - SOA.
 AOS Numeric Table stores observations (feature vectors) in a contiguous memory block as can be seen in Figure 4.</p>
 
 </div>
@@ -11915,7 +11915,7 @@ AOS Numeric Table stores observations (feature vectors) in a contiguous memory b
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>On the other hand, SOA Numeric Table stores data in a way that observations for each feature are laid out contiguously in memory as can be seen in Figure 5.</p>
+<p>On the other hand, SOA Numeric Table stores data in a way that observations for each feature are laid out contiguously in memory, as can be seen in Figure 5.</p>
 
 </div>
 </div>
@@ -11935,8 +11935,8 @@ AOS Numeric Table stores observations (feature vectors) in a contiguous memory b
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For the other basic datastructures such as <code>HomogenNumericTable</code> class, and matrices such as <code>PackedTriangularMatrix</code>, and <code>PackedSymmetricMatrix</code>, all the features are of the same basic data type. These data structures store values of the features in memory as one contiguous block in the row-major order.<br>
-In Intel DAAL, Matrix is a homogeneous numeric table most suitable for matrix algebra operations. A special treatment is given for special types of matrices such as triangular and symmetric. For those, DAAL delivers implementations with reduced memory footprint, using the special classes: <code>PackedTriangularMatrix</code> and <code>PackedSymmetricMatrix</code>.</p>
+<p>For the other basic data structures such as <code>HomogenNumericTable</code> class, and matrices such as <code>PackedTriangularMatrix</code> and <code>PackedSymmetricMatrix</code>, all the features are of the same basic data type. These data structures store values of the features in memory as one contiguous block in the row-major order.<br>
+In the context of the Intel DAAL, Matrix is a homogeneous numeric table most suitable for matrix algebra operations. A special treatment is given for special types of matrices such as triangular and symmetric. For those types, DAAL delivers implementations with reduced memory footprint using the special classes: <code>PackedTriangularMatrix</code> and <code>PackedSymmetricMatrix</code>.</p>
 
 </div>
 </div>
@@ -11946,7 +11946,7 @@ In Intel DAAL, Matrix is a homogeneous numeric table most suitable for matrix al
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Loading-Data">Loading Data<a class="anchor-link" href="#Loading-Data">&#182;</a></h2><p>Following we will present a few ways of reading data using the pyDAAL API. First we will show how to read data from a CSV file and how to perform simple data slicing operations on the data read. Then we will show how to use data types from NumPy python API inside the DAAL framework.</p>
+<h2 id="Loading-Data">Loading Data<a class="anchor-link" href="#Loading-Data">&#182;</a></h2><p>In the following section we will present a few ways of reading data using the pyDAAL API. First we will show how to read data from a CSV file and how to perform simple data slicing operations on the data read. Then, we will show how to use data types from NumPy python API inside the DAAL framework.</p>
 
 </div>
 </div>
@@ -11956,8 +11956,8 @@ In Intel DAAL, Matrix is a homogeneous numeric table most suitable for matrix al
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="From-a-CSV">From a CSV<a class="anchor-link" href="#From-a-CSV">&#182;</a></h3><p>CSV stands for comma separated value and as the name suggests, in this file, the features values for each observation are separated by commas, conversely, each observation is presented in one line, i.e, after the last feature value, the line is broken into a new one that will present the next observation features values. This file format is one of the most commonly used file formats.<br>
-In order to read from a CSV file, we first need to instantiate a new <code>FileDataSource</code>. We have to feed the data source with the name of the CSV file. We also have to define wether or not the dataset metadata (<code>Dictionary</code>) and the <code>NumericTable</code> are automatically created from the CSV.</p>
+<h3 id="From-a-CSV">From a CSV<a class="anchor-link" href="#From-a-CSV">&#182;</a></h3><p>CSV stands for comma separated values and as the name suggests, in this file, the feature values for each observation are separated by commas. Conversely, each observation is presented in one line, i.e, after the last feature value, the line is broken into a new one that will present the next observation features values. This file format is one of the most commonly used file formats.<br>
+In order to read from a CSV file, we first need to instantiate a new <code>FileDataSource</code>. We have to feed the data source with the name of the CSV file. We also have to define whether or not the dataset metadata (<code>Dictionary</code>) and the <code>NumericTable</code> are automatically created from the CSV.</p>
 
 </div>
 </div>
@@ -12016,7 +12016,7 @@ In order to read from a CSV file, we first need to instantiate a new <code>FileD
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Integration-with-NumPy">Integration with NumPy<a class="anchor-link" href="#Integration-with-NumPy">&#182;</a></h2><p>NumPy is widely spread API for manipulating multi-dimensional arrays. It is considered a common denominator in many numeric packages. Many tools for Machine Learning tasks use directly or provide builtin methods for converting from or to NumPy arrays. Following we will show how to create NumericTables from the data inside a CSV file read using NumPy methods. A limitation for creating NumericTables: the NumPy array has to be <strong>C-contiguous</strong>.</p>
+<h2 id="Integration-with-NumPy">Integration with NumPy<a class="anchor-link" href="#Integration-with-NumPy">&#182;</a></h2><p>NumPy is a widely spread API for manipulating multi-dimensional arrays. It is considered a common denominator in many numeric packages. Many tools for Machine Learning tasks use it directly or provide builtin methods for converting from or to NumPy arrays. Following we will show how to create NumericTables from the data inside a CSV file read using NumPy methods. Although, there is a limitation for creating NumericTables: the NumPy array has to be <strong>C-contiguous</strong>.</p>
 
 </div>
 </div>
@@ -12124,7 +12124,7 @@ Observations read: 307
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Another way to create a <code>NumericTable</code> is to provide the NumPy array directly to the constructor. Listing 4 shows how to do this. One very important remark that should be taken into account when building <code>HomogenNumericTable</code> from NumPy arrays is that it always needs the array to have the demensions fully defined.</p>
+<p>Another way to create a <code>NumericTable</code> is to provide the NumPy array directly to the constructor. Listing 4 shows how to do this. One very important remark that should be taken into account when building <code>HomogenNumericTable</code> from NumPy arrays is that it always requires the array to have the dimensions fully defined.</p>
 
 </div>
 </div>
@@ -12175,8 +12175,8 @@ Observations read: 307
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It is also possible to extract a NumPy array from a <code>NumericTable</code>. The code in Listing 5 shows how to do that. First we need to use a <code>BlockDescriptor</code> and fill it with the data from the <code>NumericTable</code>. It is important to stress that we have to specify the size of the block - the first parameter for the operation is the first row to load; and the second is the number of rows that will be loaded into the block. We can also specify the purpose of the block when we create, e.g., in Listing 5 we specify that the block should not be used to update the table of the <code>NumericTable</code>. We do that by using the parameter <code>readOnly</code> - we could also have used the parameters <code>readWrite</code> or <code>writeOnly</code>.<br>
-In that sense, a <code>BlockDescriptor</code> works like a view of the dataset. It is important noting that after using the block, we need to release the allocated resources.</p>
+<p>It is also possible to extract a NumPy array from a <code>NumericTable</code>. The code in Listing 5 shows how to do that. First we need to use a <code>BlockDescriptor</code> and fill it with data from the <code>NumericTable</code>. It is important to stress that we have to specify the size of the block - the first parameter for the operation is the first row to load, and the second is the number of rows that will be loaded into the block. We can also specify the purpose of the block when we create it, e.g., in Listing 5 we specify that the block should not be used to update the table of the <code>NumericTable</code>. We do that by using the parameter <code>readOnly</code> - we could also have used the parameters <code>readWrite</code> or <code>writeOnly</code>.<br>
+In that sense, a <code>BlockDescriptor</code> works like a view of the dataset. It is important to note that after using the block, we need to release the allocated resources.</p>
 
 </div>
 </div>
@@ -12230,7 +12230,7 @@ In that sense, a <code>BlockDescriptor</code> works like a view of the dataset. 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The pyDAAL API also allows to integrate other types of <code>NumericTables</code> with specific data types such as sparse matrices from scipy.</p>
+<p>The pyDAAL API also allows one to integrate other types of <code>NumericTables</code> with specific data types such as sparse matrices from scipy.</p>
 
 </div>
 </div>
@@ -12250,10 +12250,10 @@ In that sense, a <code>BlockDescriptor</code> works like a view of the dataset. 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Linear-Regression">Linear Regression<a class="anchor-link" href="#Linear-Regression">&#182;</a></h1><p>Inside any dataset on which we will try to make predictions, we have two types of variables: dependent and independent. The first one has some kind of relationship with some or the combination of the others. The nature of this relationship is what we try to define when we use a Machine Learning technique to make predictions based on the previous data.</p>
-<p>For our example, we will employ a simple regression technique called Polynomial Linear Regression. In this method we use an algorithm that tries to fit a polynomial function to the data. That means that we will define the coeficients of an equation of the form $\theta_0 + \theta_1x_1 + \theta_2x_2 + ... + \theta_mx_m$ in order to approximate the behavior of our dependent variable inside our dataset, where $x_i$ is the <em>i-th</em> feature in our dataset.<br>
-In a more general definition, the problem which we are trying to solve is to estimate the value of $y$ (our dependent variable, or response), based on the observation $X$, also named feature vector.</p>
-<p>For instance, we may want to use a regression technique to estimate the sales price of a land based on its location, and its dimensions.</p>
+<h1 id="Linear-Regression">Linear Regression<a class="anchor-link" href="#Linear-Regression">&#182;</a></h1><p>Inside any dataset into which we will try to make predictions, we have two types of variables: dependent and independent. The first one presents some dependency relationship (high correlation) with some or the combination of the others. The nature of this relationship is what we try to discover when we use a Machine Learning technique to make predictions based on the previous data.</p>
+<p>For our example, we will employ a simple regression technique called Polynomial Linear Regression. In this method we use an algorithm that tries to fit a polynomial function to the data. That means that we will define the coeficients of an equation in the form $\theta_0 + \theta_1x_1 + \theta_2x_2 + ... + \theta_mx_m$ in order to approximate the behavior of our dependent variable inside our dataset, where $x_i$ is the <em>i-th</em> feature in our dataset.<br>
+In a more general definition, the problem which we are trying to solve is to estimate the value of $y$ (our dependent variable, or response), based on the observation $X$, also known as the feature vector.</p>
+<p>For instance, we may want to use a regression technique to estimate the sales price of a land based on its location and its dimensions.</p>
 
 </div>
 </div>
@@ -12264,7 +12264,7 @@ In a more general definition, the problem which we are trying to solve is to est
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Linear-Regression-in-Details">Linear Regression in Details<a class="anchor-link" href="#Linear-Regression-in-Details">&#182;</a></h2><p>In order to use a regression based technique, we have to have a dataset for which we know the value of the dependent variable, e.g., we know the actual land prices for a few observations. Also, the value of the response should be continuous.</p>
-<p>The problem we are addressing here is a minimization problem. Our goal is, at step by step, decrease the error in our equation for which the dependent variable is the result, e.g., assuming that we are fitting a linear model to our data. The error value of our model can be thought as the sum of all the errors for each data point. We can imagine this as the distance between our model equation line and the data points. That is the intuition behind the fitting operation.<br>
+<p>The problem we are addressing here is a minimization problem. Our goal is, at each step, to decrease the error in our equation for which the dependent variable is the result, e.g., assuming that we are fitting a linear model to our data. The error value of our model can be thought as the sum of all the errors for each data point. We can imagine this as the distance between our model equation line and the data points. That is the intuitive insight behind the fitting operation.<br>
 The error measure we have just described is called the squared error and is defined as:</p>
 <p><strong>Definition 1. Squared Error</strong>: Being the real value of the dependent variable defined as $y_i$ for $i \leq n$ where $n$ is the number of observations in our dataset. Being the value predicted by the model $\hat{y}_i$ for $i \leq n$, the Squared Error $\epsilon_i$ for the $i$-th observation is given as: $\epsilon_i = (y_i - \hat{y}_i)^2$. Thus, our global Squared Error is defined as: $E=\sum_{i=1}^{n}(y_i - \hat{y}_i)^2$.</p>
 <p>In linear regression our challenge is to find the $\Theta$ vector which minimizes the error $E$ that we presented in Definition 1. In that case, the error $E$ can be seen as a function of $\theta_1, \theta_2, ..., \theta_m$. This is the function we are trying to minimize, i.e., $min(E(\Theta))$. This problem is called <strong>Multiple Linear Regression</strong> when we use several features to estimate the value of the dependent variable.</p>
@@ -12325,8 +12325,8 @@ Using a vector product notation we get: $Y = X\Theta - E$ and the Error function
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>After building a model, it is important that you are able to evaluate how good that model is. In order to do so, you should always split your dataset into a training partition, on which you will train your model and a test partition, on which you will experiment the model and measure how good that is.<br>
-There is no rule of thumb when splitting the model. Still, for most cases, a 20-80 split proportion is a good proportion. You should also be careful to draw random samples from your data in order to cover as much variance as possible. In Listing 6 we show how to draw samples from a data set using NumPy.</p>
+<p>After building a model, it is important that you are able to evaluate how good that model is. In order to do so, you should always split your dataset into a training partition, in which you will train your model, and a test partition, in which you will experiment the model and measure how good it is.<br>
+There is no rule of thumb when splitting the model. However, for most cases, a 20-80 split proportion is a good proportion. You should also be careful to draw random samples from your data in order to cover as much variance as possible. In Listing 6 we show how to draw samples from a data set using NumPy.</p>
 
 </div>
 </div>
@@ -12390,7 +12390,7 @@ Number of Observations in Test Partition: 62
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Then, in order to use pyDAAL algorithms we need to separate the dependent variable from the other features. Listing 7 shows how to cut a slice of the dataset. In this listing we use the same data read in Listing 6.</p>
+<p>In order to use pyDAAL algorithms we need to separate the dependent variable from the other features. Listing 7 shows how to cut a slice of the dataset. In this listing we use the same data read in Listing 6.</p>
 
 </div>
 </div>
@@ -12454,7 +12454,7 @@ Dimension of the test_data: (62, 6)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>After separating the variables, we can create the instance of the algorithm in the chosen computation mode and train it as seen in Listing 8.</p>
+<p>After separating the variables, we can create the instance of the algorithm in the previously chosen computation mode and train it as seen in Listing 8.</p>
 
 </div>
 </div>
@@ -12524,7 +12524,7 @@ Dimension of the test_data: (62, 6)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The values showed by the Listing 8 are the $\theta_0, \theta_1, ..., \theta_m$ for the linear regression equation. Once we have such values it is time to test our model and try to predict the response in the test partition of our dataset. Listing 9 shows how to use the test partition to check our model quality.</p>
+<p>The values showed on Listing 8 are the $\theta_0, \theta_1, ..., \theta_m$ for the linear regression equation. Once we have such values it is time to test our model and try to predict the response in the test partition of our dataset. Listing 9 shows how to use the test partition to check our model quality.</p>
 
 </div>
 </div>
@@ -12612,8 +12612,8 @@ First 4 real responses:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It is important to have ways of assessing the model quality. One of the mostly used metrics for doing so is the <strong>Root Mean Squared Error</strong> - RMSE. This measures uses the same unit as the dependent variable and basically show the accumulated error value.<br>
-The RMSE as its name suggests is calculated as:
+<p>It is important to have ways of assessing the model quality. One of the mostly used metrics for doing so is the <strong>Root Mean Squared Error</strong> - RMSE. This measure uses the same unit as the dependent variable and basically shows the accumulated error value.<br>
+The RMSE, as its name suggests, is calculated as:
 $$
 RMSE = \sqrt{\frac{\sum_{i=1}^{n}(y^{(i)}-\hat{y}^{(i)})^2}{m}}
 $$</p>
@@ -12676,7 +12676,7 @@ $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Improving-the-Model-Quality-with-features-Polynomial-Expansion">Improving the Model Quality with features Polynomial Expansion<a class="anchor-link" href="#Improving-the-Model-Quality-with-features-Polynomial-Expansion">&#182;</a></h2>
+<h2 id="Improving-the-Model-Quality-with-Polynomial-Features-Expansion">Improving the Model Quality with Polynomial Features Expansion<a class="anchor-link" href="#Improving-the-Model-Quality-with-Polynomial-Features-Expansion">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12685,11 +12685,11 @@ $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In some cases, the behavior of the data cannot be approximated using a linear function. A very popular technique for improving the model quality in cases where linear functions are not enough is Polynomial Feature Expansion. In this technique we include derived features of the original dataset, changing the equation of the regression into a higher order polynomial. Thus, a polynomial expansion of second degree would introduce quadratic versions of the features.</p>
+<p>In some cases, the behavior of the data cannot be approximated using a linear function. A very popular technique for improving the model quality for those cases where linear functions are not enough is Polynomial Feature Expansion. In this technique we include derived features from the original dataset, changing the equation of the regression into a higher order polynomial. Thus, a polynomial expansion of second degree would introduce quadratic versions of the features.</p>
 <p>The multiple linear regression equation shown - $y^{(i)} = \theta_0+\theta_1x_1^{(i)}+\theta_2x_2^{(i)}+...++\theta_mx_m^{(i)}$ becomes, in the quadratic expansion:</p>
 $$y^{(i)} = \theta_0+(\theta_1\ ^{(i)}x_1+\theta_2\ ^{(i)}x_1^2)+(\theta_3\ ^{(i)}x_2+\theta_4\ ^{(i)}x_2^2)+ ...+(\theta_{2m-1}\  ^{(i)}x_m+\theta_{2m}\  ^{(i)}x_m^2)$$<p>Note that we used the superscript before the variable to denote the $i$-th observation. Luckly, most of the modern data manipulation APIs have a built-in function for performing such expansion. It is the case of the scikit-learn toolkit. In Listing 11 we show our previous examples using several degrees of polynomial expansions.</p>
-<p>Unfortunately we were not able to do the expansion using the Normal Equation method. The pyDAAL reported that the it was not able to solve the linear system in order to calculate the $\Theta$ vector. Instead, we used the expansion with another type of Regression strategy, named Ridge regression. This type of regression is less susceptible to multicolinearity - a phenomenon that occurs when two or more features are extremely correlated. One can see that the Polynomial feature expansion although improved a little the error, it has no real effect on this type of regression.</p>
-<p>We were also not able to expand even further the polynomial because the pyDAAL started to complain that the size of the <code>NumericTable</code> used for training the model was not correct. This must be due to a constraint on the number of features used.</p>
+<p>Unfortunately we were not able to do the expansion using the Normal Equation method. The pyDAAL reported that the it was not able to solve the linear system in order to calculate the $\Theta$ vector. Instead, we used the expansion with another type of Regression strategy, named Ridge regression. This type of regression is less susceptible to multicolinearity - a phenomenon that occurs when two or more features are extremely correlated. One can see that the Polynomial feature expansion, although improved a little the error, has no real effect on this type of regression.</p>
+<p>We also were not able to expand even further the polynomial because the pyDAAL started to complain that the size of the <code>NumericTable</code> used for training the model was not correct. This must be due to a constraint on the number of features used.</p>
 
 </div>
 </div>
@@ -12775,7 +12775,7 @@ $$y^{(i)} = \theta_0+(\theta_1\ ^{(i)}x_1+\theta_2\ ^{(i)}x_1^2)+(\theta_3\ ^{(i
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Using the scikit-learn API to perform the same operation we were able to see that expanding the number of features by including their polynomial version can decrease the error. Such result can be seen in Listing 12. Also, it is easy to note that the optimal degree of expansion is 6. In the degrees of expansion 2, 3, and 4 the API also complained that it was not able to solve the linear system.</p>
+<p>By using the scikit-learn API to perform the same operation, we were able to see that expanding the number of features by including their polynomial version could decrease the error. Such result can be seen in Listing 12. Also, it is easy to note that the optimal degree of expansion is 6. In the degrees of expansion 2, 3, and 4 the API also complained that it was not able to solve the linear system.</p>
 
 </div>
 </div>
@@ -12839,7 +12839,7 @@ $$y^{(i)} = \theta_0+(\theta_1\ ^{(i)}x_1+\theta_2\ ^{(i)}x_1^2)+(\theta_3\ ^{(i
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Conclusions">Conclusions<a class="anchor-link" href="#Conclusions">&#182;</a></h1><p>Intel has developed a good tool for data science tasks. This tools is still on an early development stage, thus it easy to find some problems. This is specially true when using the pyDAAL that was officially released with Parallel Studio version 2017. The community is building around this tool once it provides a great level of integration with other Python tools.</p>
+<h1 id="Conclusions">Conclusions<a class="anchor-link" href="#Conclusions">&#182;</a></h1><p>Intel has been developing a good framework for data science tasks. These tools are still on an early development stage, thus it easy to find some problems. This is specially true when using the pyDAAL that was officially released with Parallel Studio version 2017. The community is building around this tool once it provides a great level of integration with other Python tools.</p>
 
 </div>
 </div>
