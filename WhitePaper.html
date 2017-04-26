@@ -11759,7 +11759,7 @@ div#notebook {
 </div><div style="width:100%; margin-top:50px;">
     <p style="text-align:center;">Raphael Cóbe, Silvio Stanzani, Jefferson Fialho, Rogério Iope</p>
     <p style="text-align:center;">{rmcobe,silvio,jfialho,rogerio}@ncc.unesp.br</p>
-    <p style="text-align:center;">Source available on <a href="https://github.com/intel-unesp-mcp/datascience-workshop">Github</a>
+    <p style="text-align:center;">Source available on <a href="https://github.com/intel-unesp-mcp/WhitePaper-ML1">Github</a>
 </div>
 </div>
 </div>
@@ -11779,7 +11779,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><p>Data Science is a new recent field that put together lots of concepts of other areas such as: Data mining, Data Analysis, Data modeling, Data Prediction, Data Visualization and so on.
+<h1 id="1-Introduction">1 Introduction<a class="anchor-link" href="#1-Introduction">&#182;</a></h1><p>Data Science is a new recent field that put together lots of concepts of other areas such as: Data mining, Data Analysis, Data modeling, Data Prediction, Data Visualization and so on.
 The need for performing such tasks as quickly as possible has become the main issue in today's data solutions. With that in mind, Intel has developed the Data Analytics Acceleration Library (DAAL), a highly optimized library whose goal is to provide a full solution for data analytics targeting today's highly parallel systems such as Intel Xeon Phi.<br>
 Intel DAAL delivers solutions for many steps of a data analytics pipeline, such as pre-processing, data transformations, dimensionality reduction, data modeling, prediction, and several drivers for reading and writing in most of the common data formats. A summary of all features inside the library can be seen in Figure 1.</p>
 
@@ -11839,7 +11839,7 @@ In the following sections we will explain each of the steps described above. It 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-data-used">The data used<a class="anchor-link" href="#The-data-used">&#182;</a></h2><p>In this paper we retrieved the data available at the UCI Machine Learning Repository that is used for prediction of residuary resistance of sailing yachts at the initial design stage. Such task is of a great value for evaluating the ship's performance and for estimating the required propulsive power.<br>
+<h2 id="1.1-The-data-used">1.1 The data used<a class="anchor-link" href="#1.1-The-data-used">&#182;</a></h2><p>In this paper we retrieved the data available at the UCI Machine Learning Repository that is used for prediction of residuary resistance of sailing yachts at the initial design stage. Such task is of a great value for evaluating the ship's performance and for estimating the required propulsive power.<br>
 Essentially, the inputs include the basic hull dimensions and the boat velocity.</p>
 <p>The data set comprises of 308 full-scale observations. At each observation we have data for the following features:</p>
 <ol>
@@ -11851,7 +11851,7 @@ Essentially, the inputs include the basic hull dimensions and the boat velocity.
 <li>Froude number.</li>
 <li>Residuary resistance per unit weight of displacement. (this is what we will try to predict)</li>
 </ol>
-<p>The data used is available at: <strong>TODO: Insert Link</strong></p>
+<p>The data used is available at: <a href="https://archive.ics.uci.edu/ml/datasets/Yacht+Hydrodynamics">https://archive.ics.uci.edu/ml/datasets/Yacht+Hydrodynamics</a></p>
 
 </div>
 </div>
@@ -11861,7 +11861,7 @@ Essentially, the inputs include the basic hull dimensions and the boat velocity.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Data-Management">Data Management<a class="anchor-link" href="#Data-Management">&#182;</a></h1><p>The main data abstraction used by the DAAL framework is called Numeric Table. It stores observations on lines and features on columns as can be seen in Figure 3. There are several specializations for this data structure optimized for specific use cases. We will cover this latter.</p>
+<h1 id="2.-Data-Management">2. Data Management<a class="anchor-link" href="#2.-Data-Management">&#182;</a></h1><p>The main data abstraction used by the DAAL framework is called Numeric Table. It stores observations on lines and features on columns as can be seen in Figure 3. There are several specializations for this data structure optimized for specific use cases. We will cover this latter.</p>
 <p><center><img src=datatable_structure.png width=270px/></center></p>
 <p style="text-align:center;"><strong>Figure 3.</strong> Numeric Table</p>
 </div>
@@ -11888,7 +11888,7 @@ Essentially, the inputs include the basic hull dimensions and the boat velocity.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Main-data-structures">Main data structures<a class="anchor-link" href="#Main-data-structures">&#182;</a></h2><p>A numeric table is the key data structure on which the algorithms operate. Intel DAAL supports several specializations of a numeric data layout:</p>
+<h2 id="2.1-Main-data-structures">2.1 Main data structures<a class="anchor-link" href="#2.1-Main-data-structures">&#182;</a></h2><p>A numeric table is the key data structure on which the algorithms operate. Intel DAAL supports several specializations of a numeric data layout:</p>
 <ul>
 <li><strong>Heterogeneous Tables</strong>: <strong>Structures of Arrays (SoA)</strong> and <strong>Arrays of Structures (AoS)</strong>. </li>
 <li><strong>Homogeneous Tables</strong>: <strong>dense</strong> and <strong>sparse</strong>. </li>
@@ -11946,7 +11946,7 @@ In the context of the Intel DAAL, Matrix is a homogeneous numeric table most sui
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Loading-Data">Loading Data<a class="anchor-link" href="#Loading-Data">&#182;</a></h2><p>In the following section we will present a few ways of reading data using the pyDAAL API. First we will show how to read data from a CSV file and how to perform simple data slicing operations on the data read. Then, we will show how to use data types from NumPy python API inside the DAAL framework.</p>
+<h2 id="2.2-Loading-Data">2.2 Loading Data<a class="anchor-link" href="#2.2-Loading-Data">&#182;</a></h2><p>In the following section we will present a few ways of reading data using the pyDAAL API. First we will show how to read data from a CSV file and how to perform simple data slicing operations on the data read. Then, we will show how to use data types from NumPy python API inside the DAAL framework.</p>
 
 </div>
 </div>
@@ -11956,7 +11956,7 @@ In the context of the Intel DAAL, Matrix is a homogeneous numeric table most sui
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="From-a-CSV">From a CSV<a class="anchor-link" href="#From-a-CSV">&#182;</a></h3><p>CSV stands for comma separated values and as the name suggests, in this file, the feature values for each observation are separated by commas. Conversely, each observation is presented in one line, i.e, after the last feature value, the line is broken into a new one that will present the next observation features values. This file format is one of the most commonly used file formats.<br>
+<h3 id="2.2.1-From-a-CSV">2.2.1 From a CSV<a class="anchor-link" href="#2.2.1-From-a-CSV">&#182;</a></h3><p>CSV stands for comma separated values and as the name suggests, in this file, the feature values for each observation are separated by commas. Conversely, each observation is presented in one line, i.e, after the last feature value, the line is broken into a new one that will present the next observation features values. This file format is one of the most commonly used file formats.<br>
 In order to read from a CSV file, we first need to instantiate a new <code>FileDataSource</code>. We have to feed the data source with the name of the CSV file. We also have to define whether or not the dataset metadata (<code>Dictionary</code>) and the <code>NumericTable</code> are automatically created from the CSV.</p>
 
 </div>
@@ -12016,7 +12016,7 @@ In order to read from a CSV file, we first need to instantiate a new <code>FileD
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Integration-with-NumPy">Integration with NumPy<a class="anchor-link" href="#Integration-with-NumPy">&#182;</a></h2><p>NumPy is a widely spread API for manipulating multi-dimensional arrays. It is considered a common denominator in many numeric packages. Many tools for Machine Learning tasks use it directly or provide builtin methods for converting from or to NumPy arrays. Following we will show how to create NumericTables from the data inside a CSV file read using NumPy methods. Although, there is a limitation for creating NumericTables: the NumPy array has to be <strong>C-contiguous</strong>.</p>
+<h2 id="2.3-Integration-with-NumPy">2.3 Integration with NumPy<a class="anchor-link" href="#2.3-Integration-with-NumPy">&#182;</a></h2><p>NumPy is a widely spread API for manipulating multi-dimensional arrays. It is considered a common denominator in many numeric packages. Many tools for Machine Learning tasks use it directly or provide builtin methods for converting from or to NumPy arrays. Following we will show how to create NumericTables from the data inside a CSV file read using NumPy methods. Although, there is a limitation for creating NumericTables: the NumPy array has to be <strong>C-contiguous</strong>.</p>
 
 </div>
 </div>
@@ -12240,7 +12240,7 @@ In that sense, a <code>BlockDescriptor</code> works like a view of the dataset. 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In the following section we will present how to use pyDAAL to implement a linear regression on the example data used and described in Section <strong>TODO: fill with number</strong></p>
+<p>In the following section we will present how to use pyDAAL to implement a linear regression on the example data used and described in Section 1.1.</p>
 
 </div>
 </div>
@@ -12250,7 +12250,7 @@ In that sense, a <code>BlockDescriptor</code> works like a view of the dataset. 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Linear-Regression">Linear Regression<a class="anchor-link" href="#Linear-Regression">&#182;</a></h1><p>Inside any dataset into which we will try to make predictions, we have two types of variables: dependent and independent. The first one presents some dependency relationship (high correlation) with some or the combination of the others. The nature of this relationship is what we try to discover when we use a Machine Learning technique to make predictions based on the previous data.</p>
+<h1 id="3.-Linear-Regression">3. Linear Regression<a class="anchor-link" href="#3.-Linear-Regression">&#182;</a></h1><p>Inside any dataset into which we will try to make predictions, we have two types of variables: dependent and independent. The first one presents some dependency relationship (high correlation) with some or the combination of the others. The nature of this relationship is what we try to discover when we use a Machine Learning technique to make predictions based on the previous data.</p>
 <p>For our example, we will employ a simple regression technique called Polynomial Linear Regression. In this method we use an algorithm that tries to fit a polynomial function to the data. That means that we will define the coeficients of an equation in the form $\theta_0 + \theta_1x_1 + \theta_2x_2 + ... + \theta_mx_m$ in order to approximate the behavior of our dependent variable inside our dataset, where $x_i$ is the <em>i-th</em> feature in our dataset.<br>
 In a more general definition, the problem which we are trying to solve is to estimate the value of $y$ (our dependent variable, or response), based on the observation $X$, also known as the feature vector.</p>
 <p>For instance, we may want to use a regression technique to estimate the sales price of a land based on its location and its dimensions.</p>
@@ -12263,12 +12263,12 @@ In a more general definition, the problem which we are trying to solve is to est
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Linear-Regression-in-Details">Linear Regression in Details<a class="anchor-link" href="#Linear-Regression-in-Details">&#182;</a></h2><p>In order to use a regression based technique, we have to have a dataset for which we know the value of the dependent variable, e.g., we know the actual land prices for a few observations. Also, the value of the response should be continuous.</p>
+<h2 id="3.1-Linear-Regression-in-Details">3.1 Linear Regression in Details<a class="anchor-link" href="#3.1-Linear-Regression-in-Details">&#182;</a></h2><p>In order to use a regression based technique, we have to have a dataset for which we know the value of the dependent variable, e.g., we know the actual land prices for a few observations. Also, the value of the response should be continuous.</p>
 <p>The problem we are addressing here is a minimization problem. Our goal is, at each step, to decrease the error in our equation for which the dependent variable is the result, e.g., assuming that we are fitting a linear model to our data. The error value of our model can be thought as the sum of all the errors for each data point. We can imagine this as the distance between our model equation line and the data points. That is the intuitive insight behind the fitting operation.<br>
 The error measure we have just described is called the squared error and is defined as:</p>
 <p><strong>Definition 1. Squared Error</strong>: Being the real value of the dependent variable defined as $y_i$ for $i \leq n$ where $n$ is the number of observations in our dataset. Being the value predicted by the model $\hat{y}_i$ for $i \leq n$, the Squared Error $\epsilon_i$ for the $i$-th observation is given as: $\epsilon_i = (y_i - \hat{y}_i)^2$. Thus, our global Squared Error is defined as: $E=\sum_{i=1}^{n}(y_i - \hat{y}_i)^2$.</p>
 <p>In linear regression our challenge is to find the $\Theta$ vector which minimizes the error $E$ that we presented in Definition 1. In that case, the error $E$ can be seen as a function of $\theta_1, \theta_2, ..., \theta_m$. This is the function we are trying to minimize, i.e., $min(E(\Theta))$. This problem is called <strong>Multiple Linear Regression</strong> when we use several features to estimate the value of the dependent variable.</p>
-<p>There are several algorithms for calculating the values of $\Theta$, one of the most popular is the Gradient Descent <strong>TODO: Include Referece</strong>. Following we will give an intuition of how to solve the multiple linear regression problem using a technique called Normal Equation <strong>TODO: include Reference</strong>.</p>
+<p>There are several algorithms for calculating the values of $\Theta$, one of the most popular is the Gradient Descent. Following we will give an intuition of how to solve the multiple linear regression problem using a technique called Normal Equation.</p>
 
 </div>
 </div>
@@ -12278,7 +12278,7 @@ The error measure we have just described is called the squared error and is defi
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-Math-Behind-It">The Math Behind It<a class="anchor-link" href="#The-Math-Behind-It">&#182;</a></h3><p>We first define that the value of our $i$-th response is defined as: $\hat{y}^{(i)} = \theta_0 x_0^{(i)} + \theta_1 x_1^{(i)} + \theta_2 x_2^{(i)}, ..., \theta_mx_m^{(i)}$. For notation, we will assume that $\Theta$ is the vector which contains the $\theta_m$ values. We will do the same with the features, defined inside the vector $X$, where each $x^{(i)}$ corresponds to the feature vector for the $i$-th observation. We will assume that $x_0^{(i)}=1$ for $i \leq n$, being $n$ the number of observations, i.e.:</p>
+<h3 id="3.1.1-The-Math-Behind-It">3.1.1 The Math Behind It<a class="anchor-link" href="#3.1.1-The-Math-Behind-It">&#182;</a></h3><p>We first define that the value of our $i$-th response is defined as: $\hat{y}^{(i)} = \theta_0 x_0^{(i)} + \theta_1 x_1^{(i)} + \theta_2 x_2^{(i)}, ..., \theta_mx_m^{(i)}$. For notation, we will assume that $\Theta$ is the vector which contains the $\theta_m$ values. We will do the same with the features, defined inside the vector $X$, where each $x^{(i)}$ corresponds to the feature vector for the $i$-th observation. We will assume that $x_0^{(i)}=1$ for $i \leq n$, being $n$ the number of observations, i.e.:</p>
 $$
 \Theta=
 \begin{bmatrix}
@@ -12306,7 +12306,7 @@ y^{(n)}\\
 \end{bmatrix}
 $$<p>The $y^{(i)}$ dependent variable value is defined as $y^{(i)} = \hat{y}^{(i)} - \epsilon^{(i)}$.<br>
 Using a vector product notation we get: $Y = X\Theta - E$ and the Error function $E$ is defined as:  $E(\Theta) = \sum_{i=1}^{m} (y^{(i)} - \Theta^T x^{(i)})^2$, or using the vector product notation we get that $E(\Theta) = (Y -X\Theta)^T(Y - X\Theta)$.</p>
-<p>Since we are dealing with a minimization problem, we have to take partial derivatives $\frac{\partial}{\partial \theta_i}$ to solve for each $\theta_i$ value. Although the math behind this is quite simple we will not cover this demonstration in this paper. Please refer to <strong>TODO: include ref</strong> for more details on how to solve this.</p>
+<p>Since we are dealing with a minimization problem, we have to take partial derivatives $\frac{\partial}{\partial \theta_i}$ to solve for each $\theta_i$ value. Although the math behind this is quite simple we will not cover this demonstration in this paper. Please refer to <a href="http://eli.thegreenplace.net/2014/derivation-of-the-normal-equation-for-linear-regression">http://eli.thegreenplace.net/2014/derivation-of-the-normal-equation-for-linear-regression</a> for more details on how to solve this.</p>
 
 </div>
 </div>
@@ -12316,7 +12316,7 @@ Using a vector product notation we get: $Y = X\Theta - E$ and the Error function
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Linear-Regression-in-Intel-DAAL">Linear Regression in Intel DAAL<a class="anchor-link" href="#Linear-Regression-in-Intel-DAAL">&#182;</a></h2>
+<h2 id="3.2-Linear-Regression-in-Intel-DAAL">3.2 Linear Regression in Intel DAAL<a class="anchor-link" href="#3.2-Linear-Regression-in-Intel-DAAL">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12603,7 +12603,7 @@ First 4 real responses:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Evaluating-the-Model-Quality">Evaluating the Model Quality<a class="anchor-link" href="#Evaluating-the-Model-Quality">&#182;</a></h2>
+<h2 id="3.3-Evaluating-the-Model-Quality">3.3 Evaluating the Model Quality<a class="anchor-link" href="#3.3-Evaluating-the-Model-Quality">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12676,7 +12676,7 @@ $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Improving-the-Model-Quality-with-Polynomial-Features-Expansion">Improving the Model Quality with Polynomial Features Expansion<a class="anchor-link" href="#Improving-the-Model-Quality-with-Polynomial-Features-Expansion">&#182;</a></h2>
+<h2 id="3.4-Improving-the-Model-Quality-with-Polynomial-Features-Expansion">3.4 Improving the Model Quality with Polynomial Features Expansion<a class="anchor-link" href="#3.4-Improving-the-Model-Quality-with-Polynomial-Features-Expansion">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -12839,7 +12839,7 @@ $$y^{(i)} = \theta_0+(\theta_1\ ^{(i)}x_1+\theta_2\ ^{(i)}x_1^2)+(\theta_3\ ^{(i
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Conclusions">Conclusions<a class="anchor-link" href="#Conclusions">&#182;</a></h1><p>Intel has been developing a good framework for data science tasks. These tools are still on an early development stage, thus it easy to find some problems. This is specially true when using the pyDAAL that was officially released with Parallel Studio version 2017. The community is building around this tool once it provides a great level of integration with other Python tools.</p>
+<h1 id="4.-Conclusions">4. Conclusions<a class="anchor-link" href="#4.-Conclusions">&#182;</a></h1><p>Intel has been developing a good framework for data science tasks. These tools are still on an early development stage, thus it easy to find some problems. This is specially true when using the pyDAAL that was officially released with Parallel Studio version 2017. The community is building around this tool once it provides a great level of integration with other Python tools.</p>
 
 </div>
 </div>
